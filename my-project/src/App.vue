@@ -1,11 +1,12 @@
 <template>
-  <div id="app">
-    <img alt="BQ logo" src="./assets/logo.png">
+  <div>
+    <div id="nav">
+      <img alt="BQ logo" src="./assets/logo.png">
     <HelloWorld msg="Burguer Queen"/>
     <button>cliente</button>
     <button>cocina</button>
     <br>
-    <button name="potatoes" @click="agregarProducto($name)"><img src="./assets/potatoes.png">comprar</button>
+    <button ref="potatoes" @click="agregarProducto($ref)"><img src="./assets/potatoes.png">comprar</button>
     <button name="hamburguer" @click="agregarProducto($name)"><img src="./assets/hamburguer.png">comprar</button>
     <button name="cola" @click="agregarProducto($name)"><img src="./assets/cola.png">comprar</button>
     <input type="text" v-model="nuevoProducto">
@@ -18,7 +19,13 @@
       </li>
     </ul>
     <h1>TOTAL:s/.{{total}}</h1>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
     </div>
+    <router-view/>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -30,7 +37,7 @@ export default {
         titulo: 'Monto total',
         productos: [],
         nuevoProducto: '',
-        total: 0
+        // total: 0
     }
 
   },
@@ -43,23 +50,25 @@ export default {
                 eliminarProducto(index){
         this.productos.splice(index, 1);
         },
+},
 computed: {
-        sumarCantidadDePrductos(){
-        // this.total = 0;
-        for(producto of this.productos){
-            this.total = this.total + producto.precio;
+        total(){
+        let sumaTotal = 0;
+        for(const producto of this.productos){
+            sumaTotal = sumaTotal + (producto.precio*producto.cantidad);
         }
-        return this.total;
+        return sumaTotal;
         }
 
     },
-  name: 'app',
+    
+      name: 'app',
   components: {
     HelloWorld
   }
 }
-
 </script>
+
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -67,6 +76,18 @@ computed: {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
