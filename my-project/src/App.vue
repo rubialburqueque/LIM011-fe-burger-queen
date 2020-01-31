@@ -6,9 +6,9 @@
     <button>cliente</button>
     <button>cocina</button>
     <br>
-    <button ref="potatoes" @click="agregarProducto($ref)"><img src="./assets/potatoes.png">comprar</button>
-    <button name="hamburguer" @click="agregarProducto($name)"><img src="./assets/hamburguer.png">comprar</button>
-    <button name="cola" @click="agregarProducto($name)"><img src="./assets/cola.png">comprar</button>
+    <button  @click="agregarProducto('potatoes')"><img src="./assets/potatoes.png">comprar</button>
+    <button  @click="agregarProducto('hamburguer')"><img src="./assets/hamburguer.png">comprar</button>
+    <button  @click="agregarProducto('cola')"><img src="./assets/cola.png">comprar</button>
     <input type="text" v-model="nuevoProducto">
     <button @click="agregarProducto">Agregar</button>
     <ul v-for="(producto, index) in productos" :key="index">
@@ -41,10 +41,10 @@ export default {
     }
 
   },
-  methods: {
+methods: {
         agregarProducto (){
         this.productos.push({
-            nombre: this.$name, cantidad: 1, precio: 10.00 });
+            nombre: 0, cantidad: 1, precio: 10.00 });
         this.nuevoProducto= '';
         },
                 eliminarProducto(index){
@@ -59,9 +59,11 @@ computed: {
         }
         return sumaTotal;
         }
-
     },
-    
+// mounted:{
+//   const replace = this.$refs.name,
+//   replaceDOMX = replace.getBoundingClientRect().left},
+
       name: 'app',
   components: {
     HelloWorld
@@ -69,7 +71,7 @@ computed: {
 }
 </script>
 
-<style>
+<style>@import'../node_modules/bootstrap/dist/css/bootstrap.css';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
