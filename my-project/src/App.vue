@@ -5,6 +5,10 @@
     <HelloWorld msg="Burguer Queen"/>
     <button>cliente</button>
     <button>cocina</button>
+    <form id="form" v-on:submit.prevent="addUser">
+    <input type="text" v-model="newUser.name" placeholder="Username">
+    <input type="submit" value="Add User">
+    </form>
     <br>
     <button  @click="agregarProducto('potatoes')"><img src="./assets/potatoes.png">comprar</button>
     <button  @click="agregarProducto('hamburguer')"><img src="./assets/hamburguer.png">comprar</button>
