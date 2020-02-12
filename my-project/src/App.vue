@@ -2,40 +2,63 @@
   <div>
     <div id="input">
     <img alt="BQ logo" src="./assets/logo.png">
-    <HelloWorld msg="Burguer Queen"/>
-    <label> Nombre del cliente:</label>
-    <input class= "form-control my-3" type="text" v-model="user"> 
-    <button class="btn btn-info" id="button" @click="saveUser('test')">Guardar</button>
-    <button  @click="getProduct()"><img src="./assets/potatoes.png">comprar</button>
-    <button  @click="getProduct()"><img src="./assets/hamburguer.png">comprar</button>
-    <button  @click="getProduct()"><img src="./assets/cola.png">comprar</button>
+    <HelloWorld msg="¡Hola!"/>
+    <form id="form" v-on:submit.prevent="saveUser">
+    <p v-if="!nameUser">Coloca tu nombre para poder atenderte...</p>
+    <input class= "form-control my-3 text-capitalize" type="text" v-model="nameUser" placeholder="Nombre">
+    <form action="">
+      <label>
+      Hombre: <input type="radio" v-model="gender" value="m"></label>
+      <label>
+      Mujer: <input type="radio" v-model="gender" value="f">
+      </label>
+    </form>
+    <p v-show="nameUser">
+    <button type="button" class="btn btn-primary btn-sm" @click="signUp()">aceptar</button>
+    </p>
+    </form>
+    <template v-if="nameUser">
+    <h1>
+      {{gender == 'm' ? 'Bienvenido' : 'Bienvenida'}} <th class="text-capitalize"> {{nameUser}}</th> ¿Qué se te provoca comer hoy?
+      </h1>
+      <div class="card" style="width: 10rem;">
+      <img src="./assets/potatoes.png" class="card-img-top" alt="75px">
+      <div class="card-body">
+      <h5 class="card-title">Papas fritas</h5>
+      <p class="card-text">Deliciosas papas amarillas crujientes y calientes. </p>
+      <button  class="btn btn-primary" @click="getProduct()" href="#">Comprar</button>
+      </div>
+      </div>
+    </template>
     </div>
     <br>
     <div id="output">
-    <tr v-for="us in users" :key="us">
-      <a v-bind:href="us.name" target="_blanck">{{us.name}}</a>
-    </tr>
-    <button class="btn btn-danger" @click="pintaNombreUsuario(us)">Eliminar</button>
-    <table>
+    <table class="table table-hover table-sm">
     <thead>
     <tr>
-      <th scope="col">Producto</th>
-      <th scope="col">Cantidad</th>
-      <th scope="col">Precio</th>
+      <!-- Tu pedido:  -->
+    <th scope="col">Cantidad</th>
+    <th scope="col">Producto</th>
+    <th scope="col">Precio Unidad</th>
+    <th scope="col">Precio combo</th>
     </tr>
+    </thead>
     <tbody v-for="product in products" :key="product.id">
     <tr>
-      <th scope="row">{{product.id}}</th>
-      <th>{{product.name}}</th>
-
-      <th>{{product.price}}</th>
+      <th  scope="row">{{amount}}
+      <button type="button" class="btn" @click="amount+=1">+</button>
+      <button type="button" class="btn" :disabled="amount == 1" @click="amount --">-</button>
+      </th>
+      <th>{{product.id}}</th>
+    <th>{{product.price}}</th>
+    <!-- <th>{{product.price}} +2 </th> -->
+    <button type="button" class="close" @click="deleteProduct(index)" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
     </tr>
     </tbody>
-    </thead>
-    <strong>{{product.lot}}    {{product.name}}   {{product.price*product.lot}}</strong>
-    <button @click="product.lot+=1">+</button>
-    <button @click="deleteProduct(index)">x</button>
-    <h1>TOTAL:s/.{{total}}</h1>
+    <!-- <strong>{{product.lot}} {{product.name}}   {{product.price*product.lot}}</strong> -->
+    <h1 class="input-group-text font-weight-bold">TOTAL:s/.{{total}}</h1>
     </table>
     </div>
   </div>
@@ -50,63 +73,70 @@ export default {
   components: { HelloWorld },
   data(){
     return {
-      user:'',
+      gender: '',
+      nameUser:'',
+      amount: 1,
       products: [],  
       product:{
       lot: null, 
       name: null,
       price: null,
+      total: 0,
       },
       users: []
     }},
-
+  firebase: {
+    users: db
+    },
   methods: {
-    saveUser(name){
-      db.collection("userName").add({
-      user: name,
-      moso: ''
-      })
-      .then(function(docRef) {
-      // eslint-disable-next-line no-console
-      console.log("Document written with ID: ", docRef.id);
-      })
-      .catch(function(error) {
-      // eslint-disable-next-line no-console
-      console.error("Error adding document: ", error);
-      })
-      },
-      async getProduct(){
-        try{
-        const product=[];
-        db.collection("hamburguesas").get().then((querySnapshot) => {
+    signUp(){
+ // eslint-disable-next-line no-console
+      console.log(this.nameUser);
+    },
+    // saveUser(){
+    //   db.collection("nameUser").add({
+    //   nameUser: '',
+    //   })
+    //   .then(function(docRef) {
+    //   // eslint-disable-next-line no-console
+    //   console.log("Document written with ID: ", docRef.id);
+    //   })
+    //   .catch(function(error) {
+    //   // eslint-disable-next-line no-console
+    //   console.error("Error adding document: ", error);
+    //   })
+    //   },
+
+    async getProduct(){
+      try{
+      const product=[];
+      db.collection("hamburguesas").get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-          // eslint-disable-next-line no-console
-          console.log(`${doc.id} => ${doc.data().price}`)
-          let eventDta= doc.data();
-          eventDta.id=doc.id;
-          product.push(eventDta)
-      })
-      })
-      this.products=product;
+        // eslint-disable-next-line no-console
+        console.log(`${doc.id} => ${doc.data().price}`)
+        let eventDta= doc.data();
+        eventDta.id=doc.id;
+        product.push(eventDta)
+        })})
+        this.products=product;
         } catch(error){
-      // eslint-disable-next-line no-console
-      console.error("Error adding document: ", error);
-      }
-    // newProduct() {},
+        // eslint-disable-next-line no-console
+        console.error("Error adding document: ", error);
+      }},
     // removeUser() {
     //   if(confirm('¿Seguro que quieren eliminar?')){
     //     // userRef.child(nameUser['.key']).remove();
     //   this.saveUser();
     //   }},
-    // addProduct: async function(){
+    // async addProduct(){
     //   let algo = await db.collection('userName').get();
     // // eslint-disable-next-line no-console
     // console.log(algo.docs[1].data());
     // },
-    // deleteProduct(index) {
-    //   this.products.splice(index, 1); 
-    //   },
-  }},
+    deleteProduct(index) {
+      this.products.splice(index, 1); 
+      },
+  },
   computed: {
       total() {
       let sumaTotal = 0;
