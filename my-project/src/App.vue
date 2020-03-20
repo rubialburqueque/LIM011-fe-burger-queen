@@ -1,45 +1,25 @@
 <template>
-  <div id="app">
+  <div class="bg-light" id="app">
 
-
-    <div id="demo">
-    <transition name="fade">
-    <div v-if="show">
-    <img class="text-center" alt="BQ logo" src="./assets/logo.png">
-    <HelloWorld msg="¡Hola!"/>
-    <!-- <h1>numero {{ $store.state.count }}</h1> -->
-    <form id="form" v-on:submit.prevent="addUser">
-    <input class= "form-control my-3" type="text" v-model="nameUser" placeholder="Coloca tu nombre para poder atenderte...">
-    <form id="gender">
-      Hombre: <input type="radio" v-model="gender" value="m">
-      Mujer: <input type="radio" v-model="gender" value="f">
-    </form>
-    <p v-show="nameUser">
-    <button type="button" class="btn btn-primary btn-sm" @click="addUser">aceptar</button>
-        <button class="btn btn-primary btn-sm" @click="show = !show" >aceptar</button>
-    </p>
-    </form>
-    </div>
-    </transition>
-    <template v-if="nameUser">
-    <menuOption :user="nameUser" :gender="gender"/>
-    </template>
-<checkList/>
-    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import menuOption from './components/menuOption.vue'
-import checkList from './components/CheckList'
+import UserView from './components/UserView.vue'
+import ChefView from './components/ChefView.vue'
 
 export default {
   name:'app',
+  firebase:{
+    clientes:'',
+  },
   components: {
+    user,
     HelloWorld,
     menuOption,
     checkList,
+    welcomeUser,
+    nameUser
     },
   data(){
 
@@ -47,12 +27,15 @@ export default {
         show: true,
         nameUser: '',
         hola: '',
-        gender: '',
+
     }},
   created(){
     this.$store.dispatch('getHamburguesas')
     this.$store.dispatch('getBebidas')
     this.$store.dispatch('getComplementos')
+    this.$store.dispatch('getAdicionales')
+    // eslint-disable-next-line no-console
+    console.log('getAdicionales')
 },
   methods: {
     addUser(){
