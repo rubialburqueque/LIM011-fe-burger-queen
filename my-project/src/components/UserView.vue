@@ -1,12 +1,32 @@
 <template>
   <div class="bg-light" id="app">
-
+    <div class="container" id="demo">
+      <transition class="row" name="fade">
+        <div v-if="show">
+          <img class="d-block mx-auto mb-4" alt="BQ logo" src="./assets/logo.png" width="200" height="200">
+          <HelloWorld msg="¡Bienvenid@!"/>
+          <user/>
+          <welcomeUser />
+        </div>
+      </transition>
+      <div class="row">
+        <menuOption class="col-md-6 order-md-1" :user="nameUser"/>
+        <div class="col-md-4 order-md-2 mb-4">
+        <nameUser/>
+          <checkList />
+        </div>
+      </div>
+   </div>
   </div>
 </template>
 
 <script>
-import UserView from './components/UserView.vue'
-import ChefView from './components/ChefView.vue'
+import user from './components/user.vue'
+import HelloWorld from './components/HelloWorld.vue'
+import menuOption from './components/menuOption.vue'
+import checkList from './components/CheckList.vue'
+import welcomeUser from './components/welcomeUser.vue'
+import nameUser from './components/nameUser.vue'
 
 export default {
   name:'app',

@@ -1,15 +1,9 @@
 <template>
 <div id=productsView>
-    <div></div>
-<HamburguesasView v-if="menuProducts.hamburguesas"/>
-<BebidasView v-if="menuProducts.bebidas"/>
-<ComplementoView v-if="menuProducts.complementos" />
+
 </div>
 </template>
 <script>
-import HamburguesasView from './HamburguesasView.vue'
-import BebidasView from './BebidasView.vue'
-import ComplementoView from './ComplementosView'
 
 export default {
     components:{
