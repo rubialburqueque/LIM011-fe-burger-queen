@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th scope="col">Cliente</th>
-          <th scope="col">Orden</th>
+          <th scope="col">Orden1</th>
           <th scope="col"></th>
         </tr>
       </thead>
