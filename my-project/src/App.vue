@@ -1,11 +1,14 @@
 <template>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   <div class="bg-light" id="app">
 
 <UserView/>
 <Chef-view/>
 =======
+=======
+>>>>>>> parent of dcf4aad... backup
 =======
 >>>>>>> parent of dcf4aad... backup
   <div>
@@ -40,6 +43,7 @@
       </div>
     </template>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     </div>
     <br>
@@ -71,6 +75,8 @@
     <!-- <strong>{{product.lot}} {{product.name}}   {{product.price*product.lot}}</strong> -->
     <h1 class="input-group-text font-weight-bold">TOTAL:s/.{{total}}</h1>
     </table>
+>>>>>>> parent of dcf4aad... backup
+=======
 >>>>>>> parent of dcf4aad... backup
     </div>
     <br>
@@ -110,6 +116,7 @@
 <script>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import UserView from './components/UserView.vue'
 import ChefView from './components/ChefView.vue'
 
@@ -147,6 +154,31 @@ export default {
     console.log('getAdicionales')
 },
 =======
+      gender: '',
+      nameUser:'',
+      amount: 1,
+      products: [],  
+      product:{
+      lot: null, 
+      name: null,
+      price: null,
+      total: 0,
+      },
+      users: []
+    }},
+  firebase: {
+    users: db
+    },
+>>>>>>> parent of dcf4aad... backup
+=======
+import HelloWorld from './components/HelloWorld.vue'
+import {db} from './db';
+
+export default {
+  name:'app',
+  components: { HelloWorld },
+  data(){
+    return {
       gender: '',
       nameUser:'',
       amount: 1,
