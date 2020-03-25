@@ -1,17 +1,20 @@
 /* eslint-disable no-debugger */
 import Vue from 'vue'
 import Vuex from 'vuex'
+<<<<<<< HEAD
 import {db} from '../db';
 
 import VueRouter from 'vue-router'
+=======
+>>>>>>> parent of dcf4aad... backup
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
-  export default new Vuex.Store({
-  el: '#root',
+export default new Vuex.Store({
   state: {
+<<<<<<< HEAD
     complementos:[],
     hamburguesas:[],
     bebidas:[],
@@ -23,9 +26,11 @@ Vue.config.productionTip = false
       productUnit:[],
       total: 0
     }
+=======
+>>>>>>> parent of dcf4aad... backup
   },
-      
   mutations: {
+<<<<<<< HEAD
     increment(state, index){
       state.pedido.productUnit[index].count++
     },
@@ -203,6 +208,11 @@ Vue.config.productionTip = false
     // eslint-disable-next-line no-console
     console.log(totales) ;
   },
+=======
+  },
+  actions: {
+  },
+  modules: {
+>>>>>>> parent of dcf4aad... backup
   }
 })
-
