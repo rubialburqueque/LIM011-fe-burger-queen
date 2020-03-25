@@ -1,7 +1,5 @@
 <template>
   <div>
-
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -51,10 +49,7 @@
   </div>
 </div>
 
-
-
-     
-  </div>
+</div>
 </template>
 
 <script>
