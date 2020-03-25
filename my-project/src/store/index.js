@@ -1,18 +1,10 @@
 /* eslint-disable no-debugger */
 import Vue from 'vue'
 import Vuex from 'vuex'
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import {db} from '../db';
 
 import VueRouter from 'vue-router'
-=======
->>>>>>> parent of dcf4aad... backup
-=======
->>>>>>> parent of dcf4aad... backup
-=======
->>>>>>> parent of dcf4aad... backup
+
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
@@ -20,9 +12,7 @@ Vue.config.productionTip = false
 
 export default new Vuex.Store({
   state: {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     complementos:[],
     hamburguesas:[],
     bebidas:[],
@@ -33,12 +23,11 @@ export default new Vuex.Store({
       userPedido:[],
       productUnit:[],
       total: 0
-    }
-=======
->>>>>>> parent of dcf4aad... backup
+    },
+    dataPedido: [],
   },
+
   mutations: {
-<<<<<<< HEAD
     increment(state, index){
       state.pedido.productUnit[index].count++
     },
@@ -216,27 +205,56 @@ export default new Vuex.Store({
     // eslint-disable-next-line no-console
     console.log(totales) ;
   },
-=======
+  setPedidos(context){
+    db.collection("Pedidos").add({
+      cliente: context.state.pedido.clientePedido,
+      fecha:new Date(),
+      pedido: context.state.pedido.productUnit,
+      })
+
+      .then(function(docRef) {
+      // eslint-disable-next-line no-console
+      console.log(" Documento escrito con ID: ", docRef.id);
+      
+      })
+      .catch(function(error) {
+      // eslint-disable-next-line no-console
+      console.error(" Error al agregar documento: ", error);
+      });
   },
-  actions: {
+  getPedidos(context){
+    try{
+      const pedido = [];
+      db.collection('Pedidos').orderBy('fecha')
+        .get()
+        .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // eslint-disable-next-line no-console
+          console.log(`${doc.id} => ${doc.data().pedido}`);
+          let eventoData = {
+            id: doc.id,
+            cliente: doc.data().cliente,
+            pedido: doc.data().pedido,
+          }
+          pedido.push(eventoData)
+        });
+        context.commit('setState',{
+          state: 'dataPedido',
+          value: pedido
+        })
+      })
+    } catch(error){
+      // eslint-disable-next-line no-console
+      console.log(error);
+      }
   },
-  modules: {
->>>>>>> parent of dcf4aad... backup
-=======
-  },
+  
   mutations: {
   },
   actions: {
   },
   modules: {
->>>>>>> parent of dcf4aad... backup
-=======
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
->>>>>>> parent of dcf4aad... backup
+
   }
+}
 })
