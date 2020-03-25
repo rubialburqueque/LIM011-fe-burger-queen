@@ -1,7 +1,19 @@
 <template>
-    <div id="checkList">
+  <div>
 
-        <table class="list-group mb-3">
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+ <table class="list-group mb-3">
         
         <thead>
         <tr>
@@ -30,18 +42,31 @@
         <!-- <strong>{{product.lot}} {{product.name}}   {{product.price*product.lot}}</strong> -->
         <h3 class="font-weight-bold badge ">TOTAL:s/.{{$store.state.pedido.total}}</h3>
         </table>
-
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-  Launch demo modal
-</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
+  </div>
+</div>
+
+
+
+     
+  </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex';
 export default {
+  name: 'pedidohecho',
   methods: {
-  ...mapMutations(['increment', 'decrement', 'deleteProduct', 'sumarTodo' ]), 
+  ...mapMutations(['aumentar', 'disminuir', 'borrarMenu', 'sumarTodo',]), 
+  },
+  created(){
+    this.$store.dispatch('getPedidos');
+    
   },
 }
-</script>
+</script>>

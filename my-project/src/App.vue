@@ -1,6 +1,8 @@
 <template>
   <div class="bg-light" id="app">
 
+<UserView/>
+<Chef-view/>
   </div>
 </template>
 
@@ -14,12 +16,8 @@ export default {
     clientes:'',
   },
   components: {
-    user,
-    HelloWorld,
-    menuOption,
-    checkList,
-    welcomeUser,
-    nameUser
+    UserView,
+    ChefView
     },
   data(){
 
