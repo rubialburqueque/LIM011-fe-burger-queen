@@ -2,9 +2,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import {db} from '../db';
 
 import VueRouter from 'vue-router'
+=======
+>>>>>>> parent of dcf4aad... backup
 =======
 >>>>>>> parent of dcf4aad... backup
 
@@ -14,6 +17,7 @@ Vue.config.productionTip = false
 
 export default new Vuex.Store({
   state: {
+<<<<<<< HEAD
 <<<<<<< HEAD
     complementos:[],
     hamburguesas:[],
@@ -209,6 +213,14 @@ export default new Vuex.Store({
     console.log(totales) ;
   },
 =======
+  },
+  actions: {
+  },
+  modules: {
+>>>>>>> parent of dcf4aad... backup
+=======
+  },
+  mutations: {
   },
   actions: {
   },

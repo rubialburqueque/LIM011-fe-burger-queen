@@ -1,10 +1,13 @@
 <template>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <div class="bg-light" id="app">
 
 <UserView/>
 <Chef-view/>
 =======
+=======
+>>>>>>> parent of dcf4aad... backup
   <div>
     <div id="input">
     <img alt="BQ logo" src="./assets/logo.png">
@@ -36,6 +39,39 @@
       </div>
       </div>
     </template>
+<<<<<<< HEAD
+=======
+    </div>
+    <br>
+    <div id="output">
+    <table class="table table-hover table-sm">
+    <thead>
+    <tr>
+      <!-- Tu pedido:  -->
+    <th scope="col">Cantidad</th>
+    <th scope="col">Producto</th>
+    <th scope="col">Precio Unidad</th>
+    <th scope="col">Precio combo</th>
+    </tr>
+    </thead>
+    <tbody v-for="product in products" :key="product.id">
+    <tr>
+      <th  scope="row">{{amount}}
+      <button type="button" class="btn" @click="amount+=1">+</button>
+      <button type="button" class="btn" :disabled="amount == 1" @click="amount --">-</button>
+      </th>
+      <th>{{product.id}}</th>
+    <th>{{product.price}}</th>
+    <!-- <th>{{product.price}} +2 </th> -->
+    <button type="button" class="close" @click="deleteProduct(index)" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </tr>
+    </tbody>
+    <!-- <strong>{{product.lot}} {{product.name}}   {{product.price*product.lot}}</strong> -->
+    <h1 class="input-group-text font-weight-bold">TOTAL:s/.{{total}}</h1>
+    </table>
+>>>>>>> parent of dcf4aad... backup
     </div>
     <br>
     <div id="output">
@@ -72,6 +108,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 <<<<<<< HEAD
 import UserView from './components/UserView.vue'
 import ChefView from './components/ChefView.vue'
@@ -110,6 +147,31 @@ export default {
     console.log('getAdicionales')
 },
 =======
+      gender: '',
+      nameUser:'',
+      amount: 1,
+      products: [],  
+      product:{
+      lot: null, 
+      name: null,
+      price: null,
+      total: 0,
+      },
+      users: []
+    }},
+  firebase: {
+    users: db
+    },
+>>>>>>> parent of dcf4aad... backup
+=======
+import HelloWorld from './components/HelloWorld.vue'
+import {db} from './db';
+
+export default {
+  name:'app',
+  components: { HelloWorld },
+  data(){
+    return {
       gender: '',
       nameUser:'',
       amount: 1,
