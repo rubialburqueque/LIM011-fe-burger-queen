@@ -5,11 +5,10 @@
 </template>
 <script>
 
+
 export default {
     components:{
-    HamburguesasView,
-    BebidasView,
-    ComplementoView,
+
     },
     data() {
     return {
