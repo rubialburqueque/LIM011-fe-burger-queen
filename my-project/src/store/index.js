@@ -206,10 +206,11 @@ export default new Vuex.Store({
     console.log(totales) ;
   },
   setPedidos(context){
-    db.collection("Pedidos").add({
-      cliente: context.state.pedido.clientePedido,
+    db.collection("pedidos").add({
+      cliente: context.state.pedido.userPedido,
       fecha:new Date(),
       pedido: context.state.pedido.productUnit,
+      
       })
 
       .then(function(docRef) {
@@ -248,13 +249,6 @@ export default new Vuex.Store({
       console.log(error);
       }
   },
-  
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
 
-  }
 }
 })

@@ -1,5 +1,6 @@
 <template>
   <div class="bg-light" id="app">
+    <ChefView/>
     <div class="container" id="demo">
       <transition class="row" name="fade">
         <div v-if="show">
@@ -21,6 +22,7 @@
 </template>
 
 <script>
+import ChefView from './components/ChefView.vue'
 import user from './components/user.vue'
 import HelloWorld from './components/HelloWorld.vue'
 import menuOption from './components/menuOption.vue'
@@ -34,12 +36,14 @@ export default {
     clientes:'',
   },
   components: {
+    ChefView,
     user,
     HelloWorld,
     menuOption,
     checkList,
     welcomeUser,
-    nameUser
+    nameUser,
+
     },
   data(){
 
@@ -70,14 +74,6 @@ export default {
 #app {
   background-color: yellow;
   font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
 };
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0
-}
 </style>
