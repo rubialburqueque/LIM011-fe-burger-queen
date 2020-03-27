@@ -10,6 +10,12 @@
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLiveLabel"><font style="vertical-align: inherit;">
               <nameUser/>
+              <datepicker :bootstrap-styling="true"
+                    class="form-control"
+                    :open-date="openDate"
+                    :format="customFormatter"
+                    v-model="event_at">
+              </datepicker>
               </font></h5>
             <button @click.prevent="ventana=false" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span>
