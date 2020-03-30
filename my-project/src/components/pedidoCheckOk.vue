@@ -10,12 +10,8 @@
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLiveLabel"><font style="vertical-align: inherit;">
               <nameUser/>
-              <datepicker :bootstrap-styling="true"
-                    class="form-control"
-                    :open-date="openDate"
-                    :format="customFormatter"
-                    v-model="event_at">
-              </datepicker>
+              <p>date.toUTCString()</p>
+              <input type="text" v-model="getHora" ></input>
               </font></h5>
             <button @click.prevent="ventana=false" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span>
@@ -64,17 +60,35 @@ export default {
   name: 'pedidohecho',
   data:function() {
   return {
+    hours:0,
+    minutes:0,
+    seconds:0,
     ventana: false, };
   },
   components:{
     nameUser,
   },
-  methods: {
-  ...mapMutations(['aumentar', 'disminuir', 'borrarMenu', 'sumarTodo',]), 
-  },
   created(){
     this.$store.dispatch('getPedidos','setPedidos');
-    
+    this.actualizarTiempo()
   },
+  methods: {
+  ...mapMutations(['aumentar', 'disminuir', 'borrarMenu', 'sumarTodo',]), 
+    actualizarTiempo(){
+      let date = new Date(Date.now());
+      this.hours = date.getHours();
+      this.minutes= date.getMinutes();
+      this.seconds= date.getSeconds();
+
+      this.minutes= this.minutes>9? this.minutes:'0'+(this.minutes.toString());
+      this.seconds= this.seconds>9? this.seconds:'0'+(this.seconds.toString());
+  }
+  },
+  computed:{
+    getHora(){
+      return this.hours+":"+this.minutes+":"+this.seconds;
+    }
+  }
+
 }
 </script>>
