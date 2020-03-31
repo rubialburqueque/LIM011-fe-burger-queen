@@ -5,17 +5,18 @@
     aceptar
     </button>
     <!-- Modal -->
-    <div v-bind="ventana" v-if="ventana" class="modal-dialog " role="document">
+    <div v-bind="ventana" v-if="ventana" class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLiveLabel"><font style="vertical-align: inherit;">
               <nameUser/>
-              <p>date.toUTCString()</p>
-              <input type="text" v-model="getHora" ></input>
-              </font></h5>
+              <input type="text" v-model="getHora">
+              </font>
+            </h5>
             <button @click.prevent="ventana=false" type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">×</font></font></span>
             </button>
+          </div>
         </div>
           <div class="modal-body">
             <table class="table table-borderless ">
@@ -44,13 +45,10 @@
         </table>
           </div>
           <div class="modal-footer">
-            <button @click.prevent="ventana=false" type="button" class="btn btn-secondary" data-dismiss="modal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cerrar</font></font></button>
-            <button @click.prevent="setPedidos" type="button" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Guardar cambios</font></font></button>
+            <button @click.prevent="setPedidos" type="button" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar a cocina</font></font></button>
           </div>
     </div>
-</div>
-
-</div>
+  </div>
 </template>
 
 <script>

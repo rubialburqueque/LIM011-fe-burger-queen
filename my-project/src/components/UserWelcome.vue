@@ -1,5 +1,5 @@
 <template>
-<div class="text-center" id="welcomeUser">
+<div class="text-center" id="UserWelcome">
    <p>Hola </p>
     <p class="text-capitalize center" > {{$store.state.pedido.userPedido}} </p> 
    <p>¿Qué se te provoca comer hoy?</p>

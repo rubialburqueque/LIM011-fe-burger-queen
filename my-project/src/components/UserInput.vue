@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="UserInput">
     <p>
       <input  class="form-control" v-model="$store.state.newUser" placeholder="Coloca tu nombre para poder atenderte..."> 
     </p>

@@ -1,5 +1,6 @@
 <template>
   <div  class="hello">
+    <router-link to="/">Home</router-link> 
     <table class="table table-bordered">
       <thead>
         <tr>
