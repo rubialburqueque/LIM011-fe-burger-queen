@@ -16,6 +16,7 @@ export default new Vuex.Store({
     hamburguesas:[],
     bebidas:[],
     adicionales:[],
+    pedidoView: false,
     newUser: '',
     pedido:{
       userPedido:[],
