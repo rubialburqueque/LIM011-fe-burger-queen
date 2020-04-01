@@ -12,21 +12,24 @@ Vue.config.productionTip = false
 
 export default new Vuex.Store({
   state: {
-
     complementos:[],
     hamburguesas:[],
     bebidas:[],
     adicionales:[],
-    newUser: null,
-    adicionalProducts: [],
+    newUser: '',
     pedido:{
       userPedido:[],
       productUnit:[],
       total: 0
     },
     dataPedido: [],
+    pedidoSeleccionado: {
+      user: '',
+      index: 0,
+      order: [],
+      date:'',
+    },
   },
-
   mutations: {
     increment(state, index){
       state.pedido.productUnit[index].count++
@@ -50,7 +53,14 @@ export default new Vuex.Store({
     },
     mostrarUser(state, {value}){
       state.pedido.userPedido=value
-    }
+    },
+    mostrarCliente(state, {value}){
+      state.pedido.clientePedido = value
+    },
+    mostrarPedido(state,index){
+      state.pedidoSeleccionado = state.dataPedido[index]
+      state.pedidoSeleccionado.index = index
+    },
   },
   actions:{
     getHamburguesas(context){
@@ -142,8 +152,8 @@ export default new Vuex.Store({
       // eslint-disable-next-line no-console
       console.log(error);
     }
-  },
-  getAdicionales(context){
+    },
+    getAdicionales(context){
     try{
       const adicional = [];
       db.collection('adicional')
@@ -173,82 +183,81 @@ export default new Vuex.Store({
       // eslint-disable-next-line no-console
       console.log(error);
     }
-  },
-  addUser(context, payload){
-    let user= null;
-    if(!context.newUser){
-      user=context.newUser
-    }
-    context.commit('mostrarUser', payload)
-    // eslint-disable-next-line no-console
-    console.log(user)
-  },
-  selectProduct(context, product){
-    const orden = {
-      count: product.count,
-      name: product.name,
-      price: product.price,
-      
-    };
-    const payload = {value: orden}
-
-    context.commit('llenarOrden', payload)
-    context.dispatch('sumarMenu')
-  },
-  sumarMenu(context) {
-    let totales = 0;
-    context.state.pedido.productUnit.forEach((unit) => {
-      totales += unit.price*unit.count;
-    });
-    const payload = {value: totales}
-    context.commit('sumarTodo', payload);
-    // eslint-disable-next-line no-console
-    console.log(totales) ;
-  },
-  setPedidos(context){
-    db.collection("pedidos").add({
-      cliente: context.state.pedido.userPedido,
-      fecha:new Date(),
-      pedido: context.state.pedido.productUnit,
-      
-      })
-
-      .then(function(docRef) {
-      // eslint-disable-next-line no-console
-      console.log(" Documento escrito con ID: ", docRef.id);
-      
-      })
-      .catch(function(error) {
-      // eslint-disable-next-line no-console
-      console.error(" Error al agregar documento: ", error);
-      });
-  },
-  getPedidos(context){
-    try{
-      const pedido = [];
-      db.collection('Pedidos').orderBy('fecha')
-        .get()
-        .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          // eslint-disable-next-line no-console
-          console.log(`${doc.id} => ${doc.data().pedido}`);
-          let eventoData = {
-            id: doc.id,
-            cliente: doc.data().cliente,
-            pedido: doc.data().pedido,
-          }
-          pedido.push(eventoData)
-        });
-        context.commit('setState',{
-          state: 'dataPedido',
-          value: pedido
-        })
-      })
-    } catch(error){
-      // eslint-disable-next-line no-console
-      console.log(error);
+    },
+    addUser(context, payload){
+      let user= null;
+      if(!context.newUser){
+        user=context.newUser
       }
-  },
+      context.commit('mostrarUser', payload)
+      // eslint-disable-next-line no-console
+      console.log(user)
+    },
+    selectProduct(context, product){
+      const orden = {
+        count: product.count,
+        name: product.name,
+        price: product.price,
+        
+      };
+      const payload = {value: orden}
 
-}
+      context.commit('llenarOrden', payload)
+      context.dispatch('sumarMenu')
+    },
+    sumarTodo(context) {
+      let totales = 0;
+      context.state.pedido.productUnit.forEach((unit) => {
+        totales += unit.price*unit.count;
+      });
+      const payload = {value: totales}
+      context.commit('sumarTodo', payload);
+      // eslint-disable-next-line no-console
+      console.log(totales) ;
+    },
+    setPedidos(context){
+      db.collection("pedidos").add({
+        user: context.state.pedido.order,
+        date:new Date(),
+        order: context.state.pedido.productUnit,
+        
+        })
+
+        .then(function(docRef) {
+        // eslint-disable-next-line no-console
+        console.log(" Documento escrito con ID: ", docRef.id);
+        
+        })
+        .catch(function(error) {
+        // eslint-disable-next-line no-console
+        console.error(" Error al agregar documento: ", error);
+        });
+    },
+    getPedidos(context){
+      try{
+        const pedido = [];
+        db.collection('order').orderBy('date')
+          .get()
+          .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            // eslint-disable-next-line no-console
+            console.log(`${doc.id} => ${doc.data().order}`);
+            let eventoData = {
+              id: doc.id,
+              user: doc.data().user,
+              order: doc.data().order,
+            }
+            pedido.push(eventoData)
+          });
+          context.commit('setState',{
+            state: 'dataPedido',
+            value: pedido
+          })
+        })
+      } catch(error){
+        // eslint-disable-next-line no-console
+        console.log(error);
+        }
+    },
+  }
 })

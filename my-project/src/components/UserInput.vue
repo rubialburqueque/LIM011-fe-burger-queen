@@ -10,16 +10,18 @@
 </template>
 
 <script>
-import{ mapMutations } from 'vuex'
+import{ mapMutations, mapActions } from 'vuex'
 export default {
-methods:{
-  ...mapMutations(['mostrarUser'])
-/*   addUser() {
-    if(!this.newUser) return;
-    this.user.push(this.newUser);
-    this.$store.state.pedido.userPedido = this.user;
-    this.newUser = '';
-  }, */ 
-}
+  name: "UserInput",
+  data(){
+    return {
+        nameUser: '',
+          }
+    },
+  methods:{
+  ...mapMutations(['mostrarUser']),
+  ...mapActions(['addUser']),
+  },
+
 }
 </script>

@@ -5,7 +5,6 @@
    <p>¿Qué se te provoca comer hoy?</p>
 </div>
 </template>
-
 <script>
 export default {
 

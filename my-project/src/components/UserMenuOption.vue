@@ -56,6 +56,14 @@ export default {
       },
 
     },
+  created(){
+    this.$store.dispatch('getHamburguesas')
+    this.$store.dispatch('getBebidas')
+    this.$store.dispatch('getComplementos')
+    this.$store.dispatch('getAdicionales')
+    // eslint-disable-next-line no-console
+    console.log('getAdicionales')
+  },
     // mounted(){
     //     this.$store.dispatch('getHamburguesas')
     //     this.$store.dispatch('getBebidas')

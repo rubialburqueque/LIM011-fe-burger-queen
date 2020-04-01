@@ -9,7 +9,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLiveLabel"><font style="vertical-align: inherit;">
-              <nameUser/>
+              <UserName/>
               <input type="text" v-model="getHora">
               </font>
             </h5>
@@ -20,7 +20,6 @@
         </div>
           <div class="modal-body">
             <table class="table table-borderless ">
-        
           <thead>
             <tr>
             <!-- Tu pedido:  -->
@@ -45,14 +44,14 @@
         </table>
           </div>
           <div class="modal-footer">
-            <button @click.prevent="setPedidos" type="button" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar a cocina</font></font></button>
+            <button @click= "setPedidos()"> type="button" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar a cocina</font></font></button>
           </div>
     </div>
   </div>
 </template>
 
 <script>
-import nameUser from './nameUser.vue'
+import UserName from './UserName'
 import { mapMutations } from 'vuex';
 export default {
   name: 'pedidohecho',
@@ -64,7 +63,7 @@ export default {
     ventana: false, };
   },
   components:{
-    nameUser,
+    UserName,
   },
   created(){
     this.$store.dispatch('getPedidos','setPedidos');
@@ -80,7 +79,7 @@ export default {
 
       this.minutes= this.minutes>9? this.minutes:'0'+(this.minutes.toString());
       this.seconds= this.seconds>9? this.seconds:'0'+(this.seconds.toString());
-  }
+    }
   },
   computed:{
     getHora(){

@@ -22,7 +22,7 @@
                     <small> Adicionales + s/.1:</small>
                         <div v-for="ad in $store.state.adicionales" :key="ad.id" >
                             <small>{{ad.name}} </small>
-                            <input type="checkbox"  v-model="adicionalProducts" @click="$store.dispatch('selectProduct', ad)">
+                            <input type="checkbox"  @click="$store.dispatch('selectProduct', ad)">
                         </div>
                     <button  type="button" class="btn btn-primary" @click="$store.dispatch('selectProduct', el)" href="#">Comprar</button>
                 </div>

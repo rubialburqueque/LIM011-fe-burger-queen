@@ -12,12 +12,12 @@ const routes = [
   {
    path: '/usuario',
    name: 'Usuario',
-   component: () => import('../components/UserView.vue') 
+   component: () => import('../views/UserView.vue') 
   },
   {
     path: '/chef',
     name: 'Chef',
-    component: () => import('../components/ChefView.vue') 
+    component: () => import('../views/ChefView.vue') 
   }
 ];
 
