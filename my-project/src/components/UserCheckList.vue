@@ -9,6 +9,7 @@
                 <th scope="col">Producto</th>
                 <th scope="col">Precio Unidad</th>
                 <th scope="col">Precio combo</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <!-- <tbody v-for="product in products" :key="product.id"> -->
@@ -21,28 +22,33 @@
             <th class="my-0" >{{ordenProduct.name}} </th>
             <th class="my-0" >{{ordenProduct.price}}</th>
             <th>{{ordenProduct.price * ordenProduct.count}}</th>
-        <button type="button" class="close" @click="deleteProduct(),$store.dispatch('sumarTodo')" aria-label="Close"></button>
+            <th><button type="button" class="close" @click="deleteProduct(),$store.dispatch('sumarTodo')" aria-label="Close"><span aria-hidden="true">&times;</span></button></th>
         </tr>
         </tbody>
         <!-- <strong>{{product.lot}} {{product.name}}   {{product.price*product.lot}}</strong> -->
         <h3 class="font-weight-bold badge ">TOTAL:s/.{{$store.state.pedido.total}}</h3>
         </table>
+    <UserCheckOk/>
     </div>
 </template>
 
 <script>
+import UserCheckOk from './UserpedidoCheckOk'
 import { mapMutations, mapActions, mapState} from 'vuex';
 export default {
     name:"UserCheckList",
+    components:{
+    UserCheckOk,
+    },
     methods: {
         ...mapMutations(['increment', 'decrement', 'deleteProduct', 'sumarTodo' ]), 
-        ...mapActions(['setPedidos', 'sumarTodo']),
+        ...mapActions(['setOrder', 'sumarTodo']),
      },
     computed:{
     ...mapState(['pedido'])
     },
     created(){
-    this.$store.dispatch('getPedidos');
+    this.$store.dispatch('getOrder');
 }
 }
 </script>

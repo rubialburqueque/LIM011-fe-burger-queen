@@ -24,7 +24,7 @@
                             <small>{{ad.name}} </small>
                             <input type="checkbox"  @click="$store.dispatch('selectProduct', ad)">
                         </div>
-                    <button  type="button" class="btn btn-primary" @click="$store.dispatch('selectProduct', el)" href="#">Comprar</button>
+                    <button  type="button" class="btn btn-warning btn-sm" @click="$store.dispatch('selectProduct', el)" href="#">Comprar</button>
                 </div>
                 </div>
             </div>

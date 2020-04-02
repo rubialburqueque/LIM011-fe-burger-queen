@@ -21,14 +21,17 @@ export default new Vuex.Store({
     pedido:{
       userPedido:[],
       productUnit:[],
-      total: 0
+      date: '',
     },
+    hours:0,
+    minutes:0,
+    seconds:0,
     dataPedido: [],
-    pedidoSeleccionado: {
+    pedidoSelect: {
       user: '',
       index: 0,
-      order: [],
-      date:'',
+      productPedido: []
+
     },
   },
   mutations: {
@@ -195,16 +198,20 @@ export default new Vuex.Store({
       console.log(user)
     },
     selectProduct(context, product){
+      const products = context.state.pedido.productUnit.filter(productUnit => productUnit.name === product.name)
+      if (products.length === 0) {
       const orden = {
         count: product.count,
         name: product.name,
         price: product.price,
-        
+        status: false
+      
       };
       const payload = {value: orden}
 
       context.commit('llenarOrden', payload)
       context.dispatch('sumarMenu')
+      }
     },
     sumarTodo(context) {
       let totales = 0;
@@ -216,14 +223,12 @@ export default new Vuex.Store({
       // eslint-disable-next-line no-console
       console.log(totales) ;
     },
-    setPedidos(context){
-      db.collection("pedidos").add({
-        user: context.state.pedido.order,
-        date:new Date(),
+    setOrder(context){
+      db.collection("pedido").add({
+        user: context.state.pedido.userPedido,
         order: context.state.pedido.productUnit,
-        
+        date: new Date(),
         })
-
         .then(function(docRef) {
         // eslint-disable-next-line no-console
         console.log(" Documento escrito con ID: ", docRef.id);
@@ -234,19 +239,22 @@ export default new Vuex.Store({
         console.error(" Error al agregar documento: ", error);
         });
     },
-    getPedidos(context){
+    getOrder(context){
       try{
         const pedido = [];
-        db.collection('order').orderBy('date')
+        db.collection('pedido').orderBy('date')
           .get()
           .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             // eslint-disable-next-line no-console
-            console.log(`${doc.id} => ${doc.data().order}`);
+            console.log(`${doc.id} => ${doc.data().pedido}`);
             let eventoData = {
               id: doc.id,
               user: doc.data().user,
+              count: doc.data().count,
               order: doc.data().order,
+              date: doc.data().date,
+              status: doc.data().status
             }
             pedido.push(eventoData)
           });
@@ -254,7 +262,9 @@ export default new Vuex.Store({
             state: 'dataPedido',
             value: pedido
           })
-        })
+          // eslint-disable-next-line no-console
+          console.log(pedido)
+          })
       } catch(error){
         // eslint-disable-next-line no-console
         console.log(error);

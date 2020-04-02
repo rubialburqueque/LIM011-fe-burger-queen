@@ -19,7 +19,7 @@
                         </ul>
                     </div>
                 <div class="card-footer list-group-item d-flex justify-content-between ">
-                    <button  type="button" class="btn btn-lg btn-primary btn-block" @click="$store.dispatch('selectProduct', el)" href="#">Comprar</button>
+                    <button  type="button" class="btn btn-warning btn-sm" @click="$store.dispatch('selectProduct', el)" href="#">Comprar</button>
                 </div>
                 </div>
             </div>
