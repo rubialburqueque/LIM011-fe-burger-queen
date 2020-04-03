@@ -1,20 +1,22 @@
 <template>
-<div id="menuOption">
+<div id="UserMenuOption">
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" @click="showMenu('hamburguesas')">hamburguesa</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" @click="showMenu('bebidas')">bebidas</a>
-    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" @click="showMenu('complementos')">complemento</a>
+    <a class="nav-item nav-link btn-warning active" id="nav-hamburguesa-tab" data-toggle="tab" href="#nav-hamburguesa" role="tab" aria-controls="nav-home" aria-selected="true" @click="showMenu('hamburguesas')">hamburguesas</a>
+    <a class="nav-item nav-link btn-warning" id="nav-complementos-tab" data-toggle="tab" href="#nav-complementos" role="tab" aria-controls="nav-contact" aria-selected="false" @click="showMenu('complementos')">complementos</a>
+    <a class="nav-item nav-link btn-warning"  id="nav-bebidas-tab" data-toggle="tab" href="#nav-bebidas" role="tab" aria-controls="nav-bebidas" aria-selected="false" @click="showMenu('bebidas')">bebidas</a>
+    
   </div>
 </nav>
 
 <div class="card-group" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+  <div class="tab-pane fade show active" id="nav-hamburguesa" role="tabpanel" aria-labelledby="nav-hamburguesa-tab">
     <HamburguesasView class="card" v-if="menuProducts.hamburguesas" /></div>
-  <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-    <BebidasView class="card" v-if="menuProducts.bebidas"/></div>
-  <div class="tab-pane fade show active" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+    <div class="tab-pane fade show active" id="nav-complementos" role="tabpanel" aria-labelledby="nav-complementos-tab">
     <ComplementoView class="card" v-if="menuProducts.complementos"/></div>
+  <div class="tab-pane fade show active" id="nav-bebidas" role="tabpanel" aria-labelledby="nav-bebidas-tab">
+    <BebidasView class="card" v-if="menuProducts.bebidas"/></div>
+
 </div>
 
     <!-- <button type="button" class="btn btn-primary btn-sm" @click="$store.dispatch('getHamburguesas')">hamburguesas</button>
@@ -42,7 +44,7 @@ export default {
     data(){
       return {
         menuProducts: {
-          hamburguesas: false,
+          hamburguesas: true,
           bebidas: false,
           complementos: false, 
         }
@@ -56,6 +58,14 @@ export default {
       },
 
     },
+  created(){
+    this.$store.dispatch('getHamburguesas')
+    this.$store.dispatch('getBebidas')
+    this.$store.dispatch('getComplementos')
+    this.$store.dispatch('getAdicionales')
+    // eslint-disable-next-line no-console
+    console.log('getAdicionales')
+  },
     // mounted(){
     //     this.$store.dispatch('getHamburguesas')
     //     this.$store.dispatch('getBebidas')

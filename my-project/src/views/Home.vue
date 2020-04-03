@@ -1,18 +1,24 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="hola desde vue home"/>
+  <div class="container" id="home">
+      <div>
+          <img class="d-block mx-auto mb-4" alt="BQ logo" src="../assets/logo.png" width="200" height="200">
+          <HelloWorld msg="¡Bienvenid@!" class="stretched-link text-danger"/>
+      </div>
+      <div class="btn-group " role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-outline-warning" >
+        <router-link to="/usuario" class="stretched-link text-danger">Usuario</router-link> 
+        </button>
+        <button type="button" class="btn btn-outline-warning">
+        <router-link to="/chef" class="stretched-link text-danger">Chef</router-link> 
+        </button>
+      </div>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import HelloWorld from '../components/HelloWorld.vue'
 export default {
-  name: 'home',
   components: {
-    HelloWorld
+    HelloWorld,
   }
 }
 </script>

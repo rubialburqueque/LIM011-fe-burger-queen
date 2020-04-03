@@ -22,9 +22,9 @@
                     <small> Adicionales + s/.1:</small>
                         <div v-for="ad in $store.state.adicionales" :key="ad.id" >
                             <small>{{ad.name}} </small>
-                            <input type="checkbox"  v-model="adicionalProducts">
+                            <input type="checkbox"  @click="$store.dispatch('selectProduct', ad)">
                         </div>
-                    <button  type="button" class="btn btn-primary" @click="$store.dispatch('selectProduct', el)" href="#">Comprar</button>
+                    <button  type="button" class="btn btn-warning btn-sm" @click="$store.dispatch('selectProduct', el)" href="#">Comprar</button>
                 </div>
                 </div>
             </div>
@@ -39,6 +39,7 @@
         hamburguesas: false,
         bebidas: false,
         complementos: false,
+        adicionales: false,
         }
         }
         },
@@ -56,12 +57,18 @@
                 name: product.name,
                 price: product.price,
                 };
+<<<<<<< HEAD
             // getImg(img){
             //         return img('../assets/'+ img);
             //     },
 
         this.$store.state.pedido.productUnit.push(ordenProduct)
             }
+=======
+        this.$store.state.pedido.productUnit.push(ordenProduct)
+            }
+            
+>>>>>>> 723adb7d204abda48d6c989674884af79e8a9110
         }
 }
 </script>

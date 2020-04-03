@@ -4,18 +4,22 @@ import Vuex from 'vuex'
 import {db} from '../db';
 
 import VueRouter from 'vue-router'
+<<<<<<< HEAD
+=======
+
+>>>>>>> 723adb7d204abda48d6c989674884af79e8a9110
 
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
-  export default new Vuex.Store({
-  el: '#root',
+export default new Vuex.Store({
   state: {
     complementos:[],
     hamburguesas:[],
     bebidas:[],
     adicionales:[],
+<<<<<<< HEAD
     newUser: null,
     adicionalProducts: [],
     pedido:{
@@ -23,8 +27,26 @@ Vue.config.productionTip = false
       productUnit:[],
       total: 0
     }
+=======
+    pedidoView: false,
+    newUser: '',
+    pedido:{
+      userPedido:[],
+      productUnit:[],
+      date: '',
+    },
+    hours:0,
+    minutes:0,
+    seconds:0,
+    dataPedido: [],
+    pedidoSelect: {
+      user: '',
+      index: 0,
+      productPedido: []
+
+    },
+>>>>>>> 723adb7d204abda48d6c989674884af79e8a9110
   },
-      
   mutations: {
     increment(state, index){
       state.pedido.productUnit[index].count++
@@ -48,7 +70,18 @@ Vue.config.productionTip = false
     },
     mostrarUser(state, {value}){
       state.pedido.userPedido=value
+<<<<<<< HEAD
     }
+=======
+    },
+    mostrarCliente(state, {value}){
+      state.pedido.clientePedido = value
+    },
+    mostrarPedido(state,index){
+      state.pedidoSeleccionado = state.dataPedido[index]
+      state.pedidoSeleccionado.index = index
+    },
+>>>>>>> 723adb7d204abda48d6c989674884af79e8a9110
   },
   actions:{
     getHamburguesas(context){
@@ -140,8 +173,13 @@ Vue.config.productionTip = false
       // eslint-disable-next-line no-console
       console.log(error);
     }
+<<<<<<< HEAD
   },
   getAdicionales(context){
+=======
+    },
+    getAdicionales(context){
+>>>>>>> 723adb7d204abda48d6c989674884af79e8a9110
     try{
       const adicional = [];
       db.collection('adicional')
@@ -171,6 +209,7 @@ Vue.config.productionTip = false
       // eslint-disable-next-line no-console
       console.log(error);
     }
+<<<<<<< HEAD
   },
   addUser(context, payload){
     let user= null;
@@ -203,6 +242,90 @@ Vue.config.productionTip = false
     // eslint-disable-next-line no-console
     console.log(totales) ;
   },
+=======
+    },
+    addUser(context, payload){
+      let user= null;
+      if(!context.newUser){
+        user=context.newUser
+      }
+      context.commit('mostrarUser', payload)
+      // eslint-disable-next-line no-console
+      console.log(user)
+    },
+    selectProduct(context, product){
+      const products = context.state.pedido.productUnit.filter(productUnit => productUnit.name === product.name)
+      if (products.length === 0) {
+      const orden = {
+        count: product.count,
+        name: product.name,
+        price: product.price,
+        status: false
+      
+      };
+      const payload = {value: orden}
+
+      context.commit('llenarOrden', payload)
+      context.dispatch('sumarMenu')
+      }
+    },
+    sumarTodo(context) {
+      let totales = 0;
+      context.state.pedido.productUnit.forEach((unit) => {
+        totales += unit.price*unit.count;
+      });
+      const payload = {value: totales}
+      context.commit('sumarTodo', payload);
+      // eslint-disable-next-line no-console
+      console.log(totales) ;
+    },
+    setOrder(context){
+      db.collection("pedido").add({
+        user: context.state.pedido.userPedido,
+        order: context.state.pedido.productUnit,
+        date: new Date(),
+        })
+        .then(function(docRef) {
+        // eslint-disable-next-line no-console
+        console.log(" Documento escrito con ID: ", docRef.id);
+        
+        })
+        .catch(function(error) {
+        // eslint-disable-next-line no-console
+        console.error(" Error al agregar documento: ", error);
+        });
+    },
+    getOrder(context){
+      try{
+        const pedido = [];
+        db.collection('pedido').orderBy('date')
+          .get()
+          .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            // eslint-disable-next-line no-console
+            console.log(`${doc.id} => ${doc.data().pedido}`);
+            let eventoData = {
+              id: doc.id,
+              user: doc.data().user,
+              count: doc.data().count,
+              order: doc.data().order,
+              date: doc.data().date,
+              status: doc.data().status
+            }
+            pedido.push(eventoData)
+          });
+          context.commit('setState',{
+            state: 'dataPedido',
+            value: pedido
+          })
+          // eslint-disable-next-line no-console
+          console.log(pedido)
+          })
+      } catch(error){
+        // eslint-disable-next-line no-console
+        console.log(error);
+        }
+    },
+>>>>>>> 723adb7d204abda48d6c989674884af79e8a9110
   }
 })
-

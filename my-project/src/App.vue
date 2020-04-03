@@ -1,10 +1,17 @@
 <template>
   <div class="bg-light" id="app">
+<<<<<<< HEAD
 
+=======
+    <div class="container" id="demo">
+      <router-view/>
+    </div>
+>>>>>>> 723adb7d204abda48d6c989674884af79e8a9110
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 import UserView from './components/UserView.vue'
 import ChefView from './components/ChefView.vue'
 
@@ -44,20 +51,18 @@ export default {
 
 }
 }
+=======
+
+export default {
+  name:'app',
+ }
+>>>>>>> 723adb7d204abda48d6c989674884af79e8a9110
 </script>
 <style>
 @import'../node_modules/bootstrap/dist/css/bootstrap.css';
 #app {
   background-color: yellow;
   font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+
 };
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0
-}
 </style>
