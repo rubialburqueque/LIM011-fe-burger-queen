@@ -15,14 +15,19 @@
       </thead>
       <tbody v-for="(el, index) in $store.state.dataPedido" :key="el.id">
         <tr>
-          <th scope="row"><input type="checkbox" class="form-check-input" @click="estado=true"></th>
+          <th scope="row"><input type="checkbox" class="form-check-input"></th>
           <th scope="row">{{index + 1}}</th>
           <th scope="row">{{el.user}}</th>
-          <th scope="row"><ChefProductUnit/></th>
+          <th>
+            <tr v-for="item in pedidoSeleccionado.itemsPedido" :key="item.id">
+              <td>[{{item.count}}]</td>
+              <td>[{{item.name}}]</td>
+            </tr>
+          </th>
           <th scope="row">{{el.order}}</th>
-          <th scope="row">{{el.date}}</th>          
-          <th scope="row" v-bind="estado" v-if="estado"> Pedido Listo</th>
-          <th scope="row" v-bind="estado" v-else>En proceso</th>
+          <!--<th scope="row">{{el.date}}</th>-->
+          <th scope="row">{{new Date()}}</th> 
+          <th scope="row">En proceso</th>
           <th scope="row"> <button type="button" class="close" aria-label="Close">x</button><th/>
         </tr>        
       </tbody> 
@@ -33,13 +38,12 @@
 import { mapMutations, mapActions, mapState } from 'vuex'
 export default {
   name: 'ChefProductsView',
-  estado: false,
   methods:{
     ...mapMutations(['mostrarPedido']),
     ...mapActions(['setOrder'])
   },
   computed: {
-    ...mapState(['dataPedido','pedidoSelect'])
+    ...mapState(['dataPedido','pedidoSeleccionado'])
   }, 
   created(){
     this.$store.dispatch('getOrder');
