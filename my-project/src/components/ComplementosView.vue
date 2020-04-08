@@ -3,6 +3,7 @@
         <div v-for="el in $store.state.complementos" :key="el.id" class="card" >
             <div>
                 <div class="card">
+                <img :src="getImgUrl(el.img)" class = "img">
                 <!-- <img src="" class="card-img-top" alt="">
                 --><!--<img class="card-img-top" :src="getImg(el.img)" v-bind:alt="el.nombre"> -->
                 <!-- <img class="card-img-top" :src="'https://firebasestorage.googleapis.com/v0/b/burguer-queen-rubi.appspot.com/o/'+el.img"  alt="85px"> -->
@@ -30,6 +31,9 @@
 <script>
 export default {
     methods:{
+        getImgUrl(img) {
+            return img ? require('../assets/'+img) : "";
+        },
         selectProduct(product){
         const ordenProduct = {
             name: product.name,
