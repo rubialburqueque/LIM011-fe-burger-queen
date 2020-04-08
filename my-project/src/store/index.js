@@ -20,6 +20,7 @@ export default new Vuex.Store({
     newUser: '',
     pedido:{
       userPedido:[],
+      total:0,
       productUnit:[],
       date: '',
     },
@@ -27,10 +28,10 @@ export default new Vuex.Store({
     minutes:0,
     seconds:0,
     dataPedido: [],
-    pedidoSelect: {
+    pedidoSeleccionado: {
       user: '',
       index: 0,
-      productPedido: []
+      itemsPedido: []
 
     },
   },
