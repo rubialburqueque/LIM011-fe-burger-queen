@@ -1,12 +1,12 @@
 <template>
     <div id="ChefProductUnit" >
-     <th scope="row">{{el.order}}</th>
-     <div v-for="product in pedidoSelect" :key="product.id"></div>
-      <th>{{product.count}}</th>
-      <th>{{product.name}}</th>
+      <p>hola desde chef</p>
+     <tr  v-for="item in pedidoSeleccionado.itemsPedido" :key="item.index">
+      <th>{{[item.count]}}</th>
+      <th>{{item.name}}</th>
+     </tr>
    </div>
 </template>
-
 <script>
 import { mapMutations, mapActions, mapState } from 'vuex'
 export default {
@@ -14,10 +14,10 @@ export default {
   modal:false,
   methods:{
     ...mapMutations(['mostrarPedido']),
-    ...mapActions(['setOrder'])
+    ...mapActions(['getOrder', 'editarCheck'])
   },
   computed: {
-    ...mapState(['dataPedido','pedidoSelect'])
+    ...mapState(['dataPedido','pedidoSeleccionado'])
   }, 
   created(){
     this.$store.dispatch('getOrder');
