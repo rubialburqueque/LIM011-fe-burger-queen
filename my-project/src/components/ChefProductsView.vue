@@ -1,9 +1,4 @@
 <template>
-<<<<<<< HEAD
-<div id=productsView>
-
-</div>
-=======
   <div  id="ChefProductsView">
     <table class="table table-hover">
       <thead>
@@ -38,42 +33,19 @@
       </tbody> 
     </table>
   </div>
->>>>>>> ca0eca163ddc304a3d6df45ccc935bb22340d9c5
 </template>
 <script>
 
 export default {
-<<<<<<< HEAD
-    components:{
-    HamburguesasView,
-    BebidasView,
-    ComplementoView,
-    },
-    data() {
-    return {
-
-        product:{
-        lot: null, 
-        name: null,
-        price: null,
-        total: 0,
-        amount: 1,
-        }};
-},
-    method:{
-}}
-</script>
-
-<style>
-
-</style>
-=======
   name: 'ChefProductsView',
   methods:{
+    // eslint-disable-next-line no-undef
     ...mapMutations(['mostrarPedido']),
+    // eslint-disable-next-line no-undef
     ...mapActions(['setOrder'])
   },
   computed: {
+    // eslint-disable-next-line no-undef
     ...mapState(['dataPedido','pedidoSeleccionado'])
   }, 
   created(){
@@ -83,4 +55,3 @@ export default {
   
 }
 </script>
->>>>>>> ca0eca163ddc304a3d6df45ccc935bb22340d9c5

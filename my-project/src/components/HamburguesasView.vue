@@ -54,26 +54,15 @@
         })
         },
         selectProduct(product){
+            // eslint-disable-next-line no-unused-vars
             const ordenProduct = {
                 name: product.name,
                 price: product.price,
                 };
-<<<<<<< HEAD
-            // getImg(img){
-            //         return img('../assets/'+ img);
-            //     },
-
-        this.$store.state.pedido.productUnit.push(ordenProduct)
-            }
-=======
-        this.$store.state.pedido.productUnit.push(ordenProduct)
-            }
-            
-<<<<<<< HEAD
->>>>>>> 723adb7d204abda48d6c989674884af79e8a9110
-        }
-=======
         },
->>>>>>> ca0eca163ddc304a3d6df45ccc935bb22340d9c5
-}
+}}
 </script>
+
+<style lang="stylus" scoped>
+
+</style>
